@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} - TravelDiary{% endblock %}
+
+{% block content %}
+<div class="card border-0 shadow-sm">
+  <div class="row g-0">
+
+    <!-- LEFT: Image -->
+    <div class="col-md-5">
+      {% if post.photo %}
+        <img src="{{ post.photo.url }}"
+             class="img-fluid h-100 w-100"
+             style="object-fit: cover; border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;"
+             alt="Travel photo">
+      {% else %}
+        <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+          No photo available
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT: Content -->
+    <div class="col-md-7">
+      <div class="card-body p-4">
+
+        <!-- Title -->
+        <h2 class="fw-bold mb-2">{{ post.title }}</h2>
+
+        <!-- Meta info -->
+        <div class="mb-3 text-muted small">
+          {% if post.location %}
+            <span class="badge bg-primary me-1">{{ post.location }}</span>
+          {% endif %}
+
+          {% if post.travel_date %}
+            <span class="badge bg-secondary me-2">{{ post.travel_date }}</span>
+          {% endif %}
+
+          <span>
+            By <strong>{{ post.author.username }}</strong>
+            · {{ post.created_at|date:"M d, Y" }}
+          </span>
+        </div>
+
+        <hr>
+
+        <!-- Story -->
+        <p style="white-space: pre-line; line-height: 1.7; font-size: 1rem;">
+          {{ post.story }}
+        </p>
+
+        <!-- Actions -->
+        {% if user.is_authenticated and user == post.author %}
+          <div class="mt-4 d-flex gap-2">
+            <a href="{% url 'post_edit' post.pk %}" class="btn btn-outline-warning btn-sm">
+              ✏️ Edit
+            </a>
+            <a href="{% url 'post_delete' post.pk %}" class="btn btn-outline-danger btn-sm">
+              🗑 Delete
+            </a>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<a href="{% url 'post_list' %}" class="btn btn-link mt-3">
+  ← Back to posts
+</a>
+{% endblock %}
+

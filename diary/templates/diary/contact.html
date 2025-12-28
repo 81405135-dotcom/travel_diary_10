@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us - TravelDiary{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Contact Us</h2>
+
+<p class="text-muted mb-4">
+  Have questions or suggestions? Feel free to contact us using the form below.
+</p>
+
+<form>
+  <div class="mb-3">
+    <label class="form-label">Your Name</label>
+    <input type="text" class="form-control" placeholder="Enter your name">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email address</label>
+    <input type="email" class="form-control" placeholder="name@example.com">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Message</label>
+    <textarea class="form-control" rows="4" placeholder="Your message"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary" disabled>
+    Send Message
+  </button>
+
+  <div class="form-text mt-2">
+    (Form submission disabled – demo page only)
+  </div>
+</form>
+{% endblock %}
+
+
